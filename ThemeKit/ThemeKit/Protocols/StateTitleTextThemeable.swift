@@ -19,7 +19,7 @@ public protocol StateTitleTextAttributes {
      
      - returns: The attributes for the title in the given state.
     */
-    func titleTextAttributesForState(state: UIControlState) -> [String : AnyObject]?
+    func titleTextAttributes(for state: UIControlState) -> [String : Any]?
     
     /**
      
@@ -29,7 +29,7 @@ public protocol StateTitleTextAttributes {
      - parameter state: The control state to set the title text attributes for.
      
      */
-    func setTitleTextAttributes(attributes: [String : AnyObject]?, forState state: UIControlState)
+    func setTitleTextAttributes(_ attributes: [String : Any]?, forState state: UIControlState)
     
 }
 
@@ -44,7 +44,7 @@ public protocol StateObjectTitleTextAttributes {
      
      - returns: The attributes for the title in the given state.
      */
-    func titleTextAttributesForState(state: UIControlState) -> [NSObject : AnyObject]?
+    func titleTextAttributesForState(_ state: UIControlState) -> [AnyHashable: Any]?
     
     /**
      
@@ -54,7 +54,7 @@ public protocol StateObjectTitleTextAttributes {
      - parameter state: The control state to set the title text attributes for.
      
      */
-    func setTitleTextAttributes(attributes: [NSObject : AnyObject]?, forState state: UIControlState)
+    func setTitleTextAttributes(_ attributes: [AnyHashable: Any]?, forState state: UIControlState)
     
 }
 
@@ -70,10 +70,10 @@ extension UIBarButtonItem: StateTitleTextAttributes { }
 public extension TextThemeable where Self: StateTitleTextAttributes {
     
     /// Applies the font and text colour for `UIControlState.Normal` from the given theme using `setTitleTextAttributes(_:forState:)`
-    public func applyTextTheme(theme: Theme) {
+    public func applyTextTheme(_ theme: Theme) {
         
         // theme the state dependent title text attributes
-        var attributes = self.titleTextAttributesForState(.Normal) ?? [String:AnyObject]()
+        var attributes = self.titleTextAttributes( for: UIControlState()) ?? [String:AnyObject]()
         
         if let style = textStyle {
             attributes[NSFontAttributeName] = theme.font(style)
@@ -83,7 +83,7 @@ public extension TextThemeable where Self: StateTitleTextAttributes {
             attributes[NSForegroundColorAttributeName] = theme.colour(style)
         }
         
-        setTitleTextAttributes(attributes, forState: .Normal)
+        setTitleTextAttributes(attributes, forState: UIControlState())
     }
     
 }
@@ -91,10 +91,10 @@ public extension TextThemeable where Self: StateTitleTextAttributes {
 public extension TextThemeable where Self: StateObjectTitleTextAttributes {
     
     /// Applies the font and text colour for `UIControlState.Normal` from the given theme using `setTitleTextAttributes(_:forState:)`
-    public func applyTextTheme(theme: Theme) {
+    public func applyTextTheme(_ theme: Theme) {
         
         // theme the state dependent title text attributes
-        var attributes = self.titleTextAttributesForState(.Normal) ?? [String:AnyObject]()
+        var attributes = self.titleTextAttributesForState(UIControlState()) ?? [AnyHashable:Any]()
         
         if let style = textStyle {
             attributes[NSFontAttributeName] = theme.font(style)
@@ -104,7 +104,7 @@ public extension TextThemeable where Self: StateObjectTitleTextAttributes {
             attributes[NSForegroundColorAttributeName] = theme.colour(style)
         }
         
-        setTitleTextAttributes(attributes, forState: .Normal)
+        setTitleTextAttributes(attributes, forState: UIControlState())
     }
     
 }

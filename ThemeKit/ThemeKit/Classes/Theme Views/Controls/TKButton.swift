@@ -9,30 +9,30 @@
 import UIKit
 
 @IBDesignable
-public class TKButton: UIButton, Themeable, TintColourThemeable, BackgroundColourThemeable, TextThemeable {
+open class TKButton: UIButton, Themeable, TintColourThemeable, BackgroundColourThemeable, TextThemeable {
     
      
     
     // - initWithFrame(_:) support
-    public var createdFromNib:Bool = false
+    open var createdFromNib:Bool = false
     
-    public override func awakeFromNib() {
+    open override func awakeFromNib() {
         super.awakeFromNib()
         
         createdFromNib = true
     }
     
-     public override func didMoveToSuperview() {
+     open override func didMoveToSuperview() {
             super.didMoveToSuperview()
         
-        if let theme = theme() where !createdFromNib {
+        if let theme = theme(), !createdFromNib {
             applyTheme(theme)
         }
     }
     
     // --
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         
         updateThemeIfNeeded()
@@ -40,25 +40,25 @@ public class TKButton: UIButton, Themeable, TintColourThemeable, BackgroundColou
     
     // MARK: - Themeable Properties
     
-    public var backgroundColourStyle:ColourStyle?  {
+    open var backgroundColourStyle:ColourStyle?  {
         didSet {
             checkAndUpdateColourStyle(oldValue, backgroundColourStyle)
         }
     }
     
-    public var tintColourStyle:ColourStyle?  {
+    open var tintColourStyle:ColourStyle?  {
         didSet {
             checkAndUpdateColourStyle(oldValue, tintColourStyle)
         }
     }
     
-    public var textStyle:TextStyle?  {
+    open var textStyle:TextStyle?  {
         didSet {
             checkAndUpdateTextStyle(oldValue, textStyle)
         }
     }
     
-    public var textColourStyle: ColourStyle? {
+    open var textColourStyle: ColourStyle? {
         didSet {
             checkAndUpdateColourStyle(oldValue, textColourStyle)
         }
@@ -66,7 +66,7 @@ public class TKButton: UIButton, Themeable, TintColourThemeable, BackgroundColou
     
     // MARK: Inspectable Properties
     
-    public var backgroundColourStyleId:String? {
+    open var backgroundColourStyleId:String? {
         get {
             return backgroundColourStyle?.rawValue
         }
@@ -80,7 +80,7 @@ public class TKButton: UIButton, Themeable, TintColourThemeable, BackgroundColou
         }
     }
 
-    public var tintColourStyleId:String? {
+    open var tintColourStyleId:String? {
         get {
             return tintColourStyle?.rawValue
         }
@@ -95,7 +95,7 @@ public class TKButton: UIButton, Themeable, TintColourThemeable, BackgroundColou
     }
 
     
-    public var textStyleId:String? {
+    open var textStyleId:String? {
         set {
             if let idString = newValue,
                 let style = TextStyle(rawValue:idString) {
@@ -107,7 +107,7 @@ public class TKButton: UIButton, Themeable, TintColourThemeable, BackgroundColou
         }
     }
     
-    public var textColourStyleId:String? {
+    open var textColourStyleId:String? {
         set {
             if let idString = newValue,
                 let style = ColourStyle(rawValue:idString) {
@@ -121,7 +121,7 @@ public class TKButton: UIButton, Themeable, TintColourThemeable, BackgroundColou
     
     // MARK: - Themeable Functions
     
-    public func applyTextTheme(theme: Theme) {
+    open func applyTextTheme(_ theme: Theme) {
         
         if let text = textStyle {
             titleLabel?.font = theme.font(text)

@@ -49,17 +49,17 @@ public extension UIColor {
         }
         
         if (hexString.characters.count == 9) {
-            let alphaRange = hexString.startIndex.advancedBy(1)...hexString.startIndex.advancedBy(2)
+            let alphaRange = hexString.characters.index(hexString.startIndex, offsetBy: 1)..<hexString.characters.index(hexString.startIndex, offsetBy: 2)
             
-            let opacityString = hexString.substringWithRange(alphaRange)
+            let opacityString = hexString.substring(with: alphaRange)
             
             var alphaInt:UInt32 = 0
-            let rScanner = NSScanner(string: opacityString);
-            rScanner.scanHexInt(&alphaInt)
+            let rScanner = Scanner(string: opacityString);
+            rScanner.scanHexInt32(&alphaInt)
             alpha = CGFloat(alphaInt) / 255.0;
             
-            let remainingRange = hexString.startIndex.advancedBy(3)...hexString.endIndex
-            hexString = "#\(hexString.substringWithRange(remainingRange))"
+            let remainingRange = hexString.characters.index(hexString.startIndex, offsetBy: 3)..<hexString.endIndex
+            hexString = "#\(hexString.substring(with: remainingRange))"
         }
         
         if (hexString.characters.count != 7) {
@@ -68,14 +68,14 @@ public extension UIColor {
         }
         
         let rgb:[CGFloat] = [(1,2), (3, 4), (5,6)]
-            .map({ hexString.startIndex.advancedBy($0.0)...hexString.startIndex.advancedBy($0.1) })
-            .map({ hexString.substringWithRange($0) })
+            .map({ hexString.characters.index(hexString.startIndex, offsetBy: $0.0)..<hexString.characters.index(hexString.startIndex, offsetBy: $0.1) })
+            .map({ hexString.substring(with: $0) })
             .map({ "0x\($0)" })
             .map({
                 
                 var value:UInt32 = 0
-                let scanner = NSScanner(string: $0)
-                scanner.scanHexInt(&value)
+                let scanner = Scanner(string: $0)
+                scanner.scanHexInt32(&value)
                 
                 return CGFloat(value) / 255.0
             })

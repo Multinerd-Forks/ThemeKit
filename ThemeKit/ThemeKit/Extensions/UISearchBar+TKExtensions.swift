@@ -20,7 +20,7 @@ extension UISearchBar {
     func containedTextField() -> UITextField? {
         
         var textField:UITextField?
-        iterateSubviews { (view:UIView, inout stop:Bool) -> () in
+        iterateSubviews { (view:UIView, stop:inout Bool) -> () in
             if let tf = view as? UITextField {
                 textField = tf
                 stop = true

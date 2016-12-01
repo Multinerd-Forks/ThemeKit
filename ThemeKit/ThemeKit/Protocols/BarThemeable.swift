@@ -41,14 +41,14 @@ public protocol BarThemeable: TintColourThemeable {
      - parameter theme: The theme to get the colour from to apply the style.
      
     */
-    func applyBarTheme(theme:Theme)
+    func applyBarTheme(_ theme:Theme)
 }
 
 
 public extension BarThemeable where Self:Bar {
     
     /// Queries the given theme for the colour and assigns it to the `barTintColor` property.
-    func applyBarTheme(theme:Theme) {
+    func applyBarTheme(_ theme:Theme) {
         if let style = barTintColourStyle {
             barTintColor = theme.colour(style)
         }

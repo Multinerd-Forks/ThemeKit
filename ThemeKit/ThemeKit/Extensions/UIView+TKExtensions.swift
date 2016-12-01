@@ -18,11 +18,11 @@ public extension UIView {
      - parameter condition: Closure defining what should be performed on each view traversed in the hierarchy. The first parameter is the view in the hierarchy. The second parameter can be used to prevent any further iteration.
      
     */
-    public func iterateSubviews(recursive:Bool = true, condition: (UIView, inout stop:Bool) -> ()) {
+    public func iterateSubviews(_ recursive:Bool = true, condition: (UIView, _ stop:inout Bool) -> ()) {
         
         var shouldStop = false
         
-        condition(self, stop:&shouldStop)
+        condition(self, &shouldStop)
         
         if shouldStop { return }
         
@@ -31,7 +31,7 @@ public extension UIView {
             if recursive {
                 sv.iterateSubviews(condition: condition)
             } else {
-                condition(sv, stop: &shouldStop)
+                condition(sv, &shouldStop)
             }
             
             if shouldStop { break }
@@ -48,11 +48,14 @@ public protocol IBThemeable {
 }
 
 /// Extending UIView to apply the theme at the default times: `awakeFromNib()` and `prepareForInterfaceBuilder()`. The default implementations of these methods are empty so it is safe to override them in a protocol extension.
-public extension UIView {
+//++ While this works it violates the rule that "Extensions can add new functionality to a type, but they cannot override existing functionality" and is a risky hack that might stop working or missbehave
+
+extension UIView {
     
     // move to will move to window.
     /// Applies the `theme()` of this view if the view is `Themeable`.
-    override public func awakeFromNib() {
+    
+    override open func awakeFromNib() {
         super.awakeFromNib()
         
         if let themeable = self as? Themeable,
@@ -62,7 +65,7 @@ public extension UIView {
     }
 
     /// Applies the `ibTheme()` of this view if the view is `IBThemeable`.
-    override public func prepareForInterfaceBuilder() {
+    override open func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         
         if let themeable = self as? Themeable,

@@ -8,30 +8,30 @@
 
 import UIKit
 
-public class TKTabBar: UITabBar, BarThemeable {
+open class TKTabBar: UITabBar, BarThemeable {
     
      
     
     // - initWithFrame(_:) support
-    public var createdFromNib:Bool = false
+    open var createdFromNib:Bool = false
     
-    public override func awakeFromNib() {
+    open override func awakeFromNib() {
         super.awakeFromNib()
         
         createdFromNib = true
     }
     
-    public override func didMoveToSuperview() {
+    open override func didMoveToSuperview() {
         super.didMoveToSuperview()
         
-        if let theme = theme() where !createdFromNib {
+        if let theme = theme(), !createdFromNib {
             applyTheme(theme)
         }
     }
     
     // --
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         
         updateThemeIfNeeded()
@@ -40,13 +40,13 @@ public class TKTabBar: UITabBar, BarThemeable {
     // MARK: - Themeable Properties
     
     
-    public var tintColourStyle:ColourStyle?  {
+    open var tintColourStyle:ColourStyle?  {
         didSet {
             checkAndUpdateColourStyle(oldValue, tintColourStyle)
         }
     }
     
-    public var barTintColourStyle:ColourStyle?  {
+    open var barTintColourStyle:ColourStyle?  {
         didSet {
             checkAndUpdateColourStyle(oldValue, barTintColourStyle)
         }
@@ -54,7 +54,7 @@ public class TKTabBar: UITabBar, BarThemeable {
     
     // MARK: Inspectable Properties
     
-    public var tintColourStyleId:String? {
+    open var tintColourStyleId:String? {
         get {
             return tintColourStyle?.rawValue
         }
@@ -68,7 +68,7 @@ public class TKTabBar: UITabBar, BarThemeable {
         }
     }
     
-    public var barTintColourStyleId:String? {
+    open var barTintColourStyleId:String? {
         set {
             if let idString = newValue,
                 let style = ColourStyle(rawValue:idString) {
@@ -82,7 +82,7 @@ public class TKTabBar: UITabBar, BarThemeable {
 
     // Theme Functions
     
-    public func applyTheme(theme:Theme) {
+    open func applyTheme(_ theme:Theme) {
         
         applyProtocolThemes(theme)
         

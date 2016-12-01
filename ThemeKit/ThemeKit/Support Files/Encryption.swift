@@ -56,11 +56,11 @@ let secret = "laSd23jC7dl8Gb"
 
 extension String {
     
-    func digestUsingAlgorithm(algorithm: HMACAlgorithm, key: String = secret) -> String! {
+    func digestUsingAlgorithm(_ algorithm: HMACAlgorithm, key: String = secret) -> String! {
         
-        let hmacData = HMAC.hmac(self, withKey: key, usingAlgorithm: algorithm)
+        let hmacData = HMAC.hmac(self, withKey: key, using: algorithm)
         
-        return hmacData.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+        return hmacData!.base64EncodedString(options: .lineLength64Characters)
     }
     
 }

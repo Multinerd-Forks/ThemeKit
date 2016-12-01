@@ -11,72 +11,72 @@ import UIKit
 let TKDefaultInsets = UIEdgeInsetsMake(2.0, 7.0, 2.0, 7.0)
 
 @IBDesignable
-public class TKTextField: UITextField, BackgroundColourThemeable, TintColourThemeable, TextThemeable {
+open class TKTextField: UITextField, BackgroundColourThemeable, TintColourThemeable, TextThemeable {
     
      
     
     // - initWithFrame(_:) support
-    public var createdFromNib:Bool = false
+    open var createdFromNib:Bool = false
     
-    public override func awakeFromNib() {
+    open override func awakeFromNib() {
         
         super.awakeFromNib()
         
         createdFromNib = true
     }
     
-     public override func didMoveToSuperview() {
+     open override func didMoveToSuperview() {
             super.didMoveToSuperview()
         
-        if let theme = theme() where !createdFromNib {
+        if let theme = theme(), !createdFromNib {
             applyTheme(theme)
         }
     }
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         
         updateThemeIfNeeded()
         
         // TODO: This should be .Fill if there is no text and the placholderTextStyle != nil but .Center otherwise. There is still a bug when editting but no text is typed, so the placeholder is still visible
         
-        if let text = self.text where !text.isEmpty {
-            contentVerticalAlignment = .Center
+        if let text = self.text, !text.isEmpty {
+            contentVerticalAlignment = .center
         } else {
-            contentVerticalAlignment = .Fill
+            contentVerticalAlignment = .fill
         }
     }
     
     // --
     
-    public var backgroundColourStyle:ColourStyle? {
+    open var backgroundColourStyle:ColourStyle? {
         didSet {
             checkAndUpdateColourStyle(oldValue, backgroundColourStyle)
         }
     }
     
-    public var tintColourStyle:ColourStyle? {
+    open var tintColourStyle:ColourStyle? {
         didSet {
             checkAndUpdateColourStyle(oldValue, tintColourStyle)
         }
     }
     
-    public var textStyle:TextStyle? {
+    open var textStyle:TextStyle? {
         didSet {
             checkAndUpdateTextStyle(oldValue, textStyle)
         }
     }
     
-    public var textColourStyle:ColourStyle?  {
+    open var textColourStyle:ColourStyle?  {
         didSet {
             checkAndUpdateColourStyle(oldValue, textColourStyle)
         }
     }
     
-    private var _placeholderTextStyle:TextStyle?
+    fileprivate var _placeholderTextStyle:TextStyle?
     
     /// This can be set explicitly to configure the style of the placeholder text, otherwise it defaults to the textStyle property.
-    public var placeholderTextStyle:TextStyle? {
+    open var placeholderTextStyle:TextStyle? {
         get {
             return _placeholderTextStyle ?? textStyle
         }
@@ -88,7 +88,7 @@ public class TKTextField: UITextField, BackgroundColourThemeable, TintColourThem
         }
     }
     
-    public var placeholderTextColourStyle:ColourStyle?  {
+    open var placeholderTextColourStyle:ColourStyle?  {
         didSet {
             if oldValue != placeholderTextColourStyle {
                 setNeedsUpdateTheme()
@@ -98,7 +98,7 @@ public class TKTextField: UITextField, BackgroundColourThemeable, TintColourThem
     
     // MARK: Inspectable Properties
     
-    public var backgroundColourStyleId:String? {
+    open var backgroundColourStyleId:String? {
         get {
             return backgroundColourStyle?.rawValue
         }
@@ -112,7 +112,7 @@ public class TKTextField: UITextField, BackgroundColourThemeable, TintColourThem
         }
     }
     
-    public var tintColourStyleId:String? {
+    open var tintColourStyleId:String? {
         get {
             return tintColourStyle?.rawValue
         }
@@ -126,7 +126,7 @@ public class TKTextField: UITextField, BackgroundColourThemeable, TintColourThem
         }
     }
 
-    public var textStyleId:String? {
+    open var textStyleId:String? {
         set {
             if let idString = newValue,
                 let style = TextStyle(rawValue:idString) {
@@ -138,7 +138,7 @@ public class TKTextField: UITextField, BackgroundColourThemeable, TintColourThem
         }
     }
     
-    public var textColourStyleId:String? {
+    open var textColourStyleId:String? {
         set {
             if let idString = newValue,
                 let style = ColourStyle(rawValue:idString) {
@@ -150,7 +150,7 @@ public class TKTextField: UITextField, BackgroundColourThemeable, TintColourThem
         }
     }
 
-    public var placeholderTextStyleId:String? {
+    open var placeholderTextStyleId:String? {
         set {
             if let idString = newValue,
                 let style = TextStyle(rawValue:idString) {
@@ -162,7 +162,7 @@ public class TKTextField: UITextField, BackgroundColourThemeable, TintColourThem
         }
     }
     
-    public var placeholderTextColourStyleId:String? {
+    open var placeholderTextColourStyleId:String? {
         set {
             if let idString = newValue,
                 let style = ColourStyle(rawValue:idString) {
@@ -177,7 +177,7 @@ public class TKTextField: UITextField, BackgroundColourThemeable, TintColourThem
     // MARK: Text Field Methods
     
     /// can set to nil to return to set textInsets to the default value but will always return a value
-    @IBInspectable public var textInsetsString:String? {
+    @IBInspectable open var textInsetsString:String? {
         get {
             return "{\(textInsets.top),\(textInsets.left),\(textInsets.bottom),\(textInsets.right)}"
         } set {
@@ -187,19 +187,19 @@ public class TKTextField: UITextField, BackgroundColourThemeable, TintColourThem
         }
     }
     
-    override public func intrinsicContentSize() -> CGSize {
+    override open var intrinsicContentSize : CGSize {
         
 //        print("sizing: \(self)")
         
-        let superSize = super.intrinsicContentSize()
+        let superSize = super.intrinsicContentSize
 //        print("super: \(superSize)")
         
         if let theme = theme(),
-            myFont = font {
+            let myFont = font {
                 // If font is not set, it is the default font so super.intrinsicContentSize() will be correct
-                let text:NSString = self.text ?? "Testing Text"
-                let textHeight = text.boundingRectWithSize(CGSizeMake(CGFloat.max, CGFloat.max),
-                    options: NSStringDrawingOptions.UsesLineFragmentOrigin,
+                let text:NSString = self.text as NSString? ?? "Testing Text"
+                let textHeight = text.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude),
+                    options: NSStringDrawingOptions.usesLineFragmentOrigin,
                     attributes: [NSFontAttributeName: myFont],
                     context: nil).size.height
                 var height = textHeight
@@ -218,8 +218,8 @@ public class TKTextField: UITextField, BackgroundColourThemeable, TintColourThem
                 if let attributed = attributedPlaceholder {
                     
                     // only consider the placeholder if there is an attributed placeholder, as this will be from the text style applied for the theme
-                    let placeholderHeight = attributed.boundingRectWithSize(CGSizeMake(CGFloat.max, CGFloat.max),
-                        options: NSStringDrawingOptions.UsesLineFragmentOrigin,
+                    let placeholderHeight = attributed.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude),
+                        options: NSStringDrawingOptions.usesLineFragmentOrigin,
                         context: nil).size.height
                     
 //                    print("\(attributed.string): \(placeholderHeight)")
@@ -237,23 +237,23 @@ public class TKTextField: UITextField, BackgroundColourThemeable, TintColourThem
                 // don't let this become smaller than the default as other views won't fit correctly
                 height = max(superSize.height, height)
                 
-                return CGSizeMake(superSize.width, height)
+                return CGSize(width: superSize.width, height: height)
         }
         
         return superSize
     }
     
-    override public func textRectForBounds(bounds: CGRect) -> CGRect {
+    override open func textRect(forBounds bounds: CGRect) -> CGRect {
         
         // let superRect = super.textRectForBounds(bounds)
         
-        let leftRect = leftViewRectForBounds(bounds)
-        let rightRect = rightViewRectForBounds(bounds)
+        let leftRect = leftViewRect(forBounds: bounds)
+        let rightRect = rightViewRect(forBounds: bounds)
         
         var newBounds = bounds
         // inset the bounds based on the left and right views (this is for search bar support)
         newBounds.origin.x += leftRect.origin.x + leftRect.size.width
-        newBounds.size.width -= leftRect.origin.x + leftRect.size.width + (CGRectGetMaxX(bounds) - rightRect.origin.x)
+        newBounds.size.width -= leftRect.origin.x + leftRect.size.width + (bounds.maxX - rightRect.origin.x)
         
         // inset the bounds based on the text insets property.
         newBounds.origin.x += textInsets.left
@@ -266,14 +266,14 @@ public class TKTextField: UITextField, BackgroundColourThemeable, TintColourThem
         return newBounds
     }
     
-    public override func editingRectForBounds(bounds: CGRect) -> CGRect {
-        return textRectForBounds(bounds)
+    open override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return textRect(forBounds: bounds)
     }
     
-    override public func placeholderRectForBounds(bounds: CGRect) -> CGRect {
+    override open func placeholderRect(forBounds bounds: CGRect) -> CGRect {
         
         // let superRect = super.placeholderRectForBounds(bounds)
-        let textRect = textRectForBounds(bounds)
+        let textRect = self.textRect(forBounds: bounds)
         
 //        print("placeholder: \(superRect) -> \(textRect)")
         
@@ -281,7 +281,7 @@ public class TKTextField: UITextField, BackgroundColourThemeable, TintColourThem
     }
     
     
-    public var textInsets:UIEdgeInsets = TKDefaultInsets  {
+    open var textInsets:UIEdgeInsets = TKDefaultInsets  {
         didSet {
             if !UIEdgeInsetsEqualToEdgeInsets(textInsets, oldValue) {
                 invalidateIntrinsicContentSize()
@@ -290,7 +290,7 @@ public class TKTextField: UITextField, BackgroundColourThemeable, TintColourThem
         }
     }
     
-    override public var placeholder: String? {
+    override open var placeholder: String? {
         didSet {
             if let theme = theme() {
                 updatePlaceholder(theme)
@@ -298,18 +298,18 @@ public class TKTextField: UITextField, BackgroundColourThemeable, TintColourThem
         }
     }
 
-    public func applyTheme(theme: Theme) {
+    open func applyTheme(_ theme: Theme) {
         applyProtocolThemes(theme)
         
         updatePlaceholder(theme)
     }
     
-    func updatePlaceholder(theme:Theme) {
+    func updatePlaceholder(_ theme:Theme) {
         if let attributedPlaceholder = self.attributedPlaceholder ?? (placeholder != nil ? NSAttributedString(string: placeholder!) : nil) {
             
             // confiure the placeholder
             
-            var attributes = attributedPlaceholder.attributesAtIndex(0, effectiveRange: nil)
+            var attributes = attributedPlaceholder.attributes(at: 0, effectiveRange: nil)
             
             if let placeholderStyle = self.placeholderTextStyle {
                 attributes[NSFontAttributeName] = theme.font(placeholderStyle)

@@ -16,7 +16,7 @@ public protocol Themeable: class {
     func theme() -> Theme?
     
     /// Sets properties based on *Themeable protocol properties. A default implementation is provided for `UIView`s.
-    func applyTheme(theme:Theme)
+    func applyTheme(_ theme:Theme)
 
     /// A default implementation is provided for `UIView`s.
     func setNeedsUpdateTheme()
@@ -27,7 +27,7 @@ public protocol Themeable: class {
 
 public extension Themeable {
     
-    public func applyProtocolThemes(theme:Theme) {
+    public func applyProtocolThemes(_ theme:Theme) {
         if let backgroundSelf = self as? BackgroundColourThemeable {
             backgroundSelf.applyBackgroundTheme(theme)
         }
@@ -49,19 +49,19 @@ public extension Themeable {
         }
     }
     
-    func applyTheme(theme:Theme) {
+    func applyTheme(_ theme:Theme) {
         applyProtocolThemes(theme)
     }
     
     /// calls `setNeedsUpdateTheme() iff the values have changed.
-    func checkAndUpdateColourStyle(oldValue:ColourStyle?, _ newValue:ColourStyle?) {
+    func checkAndUpdateColourStyle(_ oldValue:ColourStyle?, _ newValue:ColourStyle?) {
         if (oldValue != newValue) {
             setNeedsUpdateTheme()
         }
     }
     
     /// calls `setNeedsUpdateTheme() iff the values have changed.
-    func checkAndUpdateTextStyle(oldValue:TextStyle?, _ newValue:TextStyle?) {
+    func checkAndUpdateTextStyle(_ oldValue:TextStyle?, _ newValue:TextStyle?) {
         if (oldValue != newValue) {
             setNeedsUpdateTheme()
         }
@@ -80,17 +80,17 @@ public extension Themeable where Self:UIView {
 //        }
         
         let vendor = TKThemeVendor.shared()
-        let theme = vendor.defaultTheme
+        let theme = vendor?.defaultTheme
         return theme
     }
     
     // private variable to support the `setNeedsUpdateTheme()` and `updateThemeIfNeeded()` extensions.
-    private var _needsUpdateTheme:Bool {
+    fileprivate var _needsUpdateTheme:Bool {
         get {
             return (objc_getAssociatedObject(self, &ThemeableNeedsUpdateThemeKey) as? NSNumber)?.boolValue ?? true
         }
         set {
-            objc_setAssociatedObject(self, &ThemeableNeedsUpdateThemeKey, NSNumber(bool: newValue), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &ThemeableNeedsUpdateThemeKey, NSNumber(value: newValue as Bool), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
@@ -119,17 +119,17 @@ public extension Themeable where Self:UIBarItem {
         //        }
         
         let vendor = TKThemeVendor.shared()
-        let theme = vendor.defaultTheme
+        let theme = vendor?.defaultTheme
         return theme
     }
     
     // private variable to support the `setNeedsUpdateTheme()` and `updateThemeIfNeeded()` extensions.
-    private var _needsUpdateTheme:Bool {
+    fileprivate var _needsUpdateTheme:Bool {
         get {
             return (objc_getAssociatedObject(self, &ThemeableNeedsUpdateThemeKey) as? NSNumber)?.boolValue ?? true
         }
         set {
-            objc_setAssociatedObject(self, &ThemeableNeedsUpdateThemeKey, NSNumber(bool: newValue), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &ThemeableNeedsUpdateThemeKey, NSNumber(value: newValue as Bool), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     

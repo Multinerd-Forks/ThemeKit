@@ -9,48 +9,48 @@
 import UIKit
 
 @IBDesignable
-public class TKSegmentedControl: UISegmentedControl, BackgroundColourThemeable, TintColourThemeable, TextThemeable {
+open class TKSegmentedControl: UISegmentedControl, BackgroundColourThemeable, TintColourThemeable, TextThemeable {
     
      
     
     // - initWithFrame(_:) support
-    public var createdFromNib:Bool = false
+    open var createdFromNib:Bool = false
     
-    public override func awakeFromNib() {
+    open override func awakeFromNib() {
         super.awakeFromNib()
         
         createdFromNib = true
     }
     
-     public override func didMoveToSuperview() {
+     open override func didMoveToSuperview() {
             super.didMoveToSuperview()
         
-        if let theme = theme() where !createdFromNib {
+        if let theme = theme(), !createdFromNib {
             applyTheme(theme)
         }
     }
     
     // --
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         
         updateThemeIfNeeded()
     }
     
     // ensure the control fits a row of text in its themed font
-    public override func intrinsicContentSize() -> CGSize {
-        let superSize = super.intrinsicContentSize()
+    open override var intrinsicContentSize : CGSize {
+        let superSize = super.intrinsicContentSize
         
-        if let font = titleTextAttributesForState(self.state)?[NSFontAttributeName] as? UIFont {
+        if let font = titleTextAttributes(for: self.state)?[NSFontAttributeName] as? UIFont {
             
             let test:NSString = "Testing"
-            let boundingRect = test.boundingRectWithSize(CGSizeMake(CGFloat.max, CGFloat.max),
-                options: NSStringDrawingOptions.UsesLineFragmentOrigin,
+            let boundingRect = test.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude),
+                options: NSStringDrawingOptions.usesLineFragmentOrigin,
                 attributes: [NSFontAttributeName: font],
                 context: nil)
             
-            return CGSizeMake(superSize.width, ceil(boundingRect.height) + 2.0 * 7.0)
+            return CGSize(width: superSize.width, height: ceil(boundingRect.height) + 2.0 * 7.0)
         }
         
         return superSize
@@ -58,25 +58,25 @@ public class TKSegmentedControl: UISegmentedControl, BackgroundColourThemeable, 
     
     // MARK: - Theme Properties
     
-    public var backgroundColourStyle:ColourStyle? {
+    open var backgroundColourStyle:ColourStyle? {
         didSet {
             checkAndUpdateColourStyle(oldValue, backgroundColourStyle)
         }
     }
     
-    public var tintColourStyle:ColourStyle? {
+    open var tintColourStyle:ColourStyle? {
         didSet {
             checkAndUpdateColourStyle(oldValue, tintColourStyle)
         }
     }
     
-    public var textStyle:TextStyle?  {
+    open var textStyle:TextStyle?  {
         didSet {
             checkAndUpdateTextStyle(oldValue, textStyle)
         }
     }
     
-    public var textColourStyle:ColourStyle? {
+    open var textColourStyle:ColourStyle? {
         didSet {
             checkAndUpdateColourStyle(oldValue, textColourStyle)
         }
@@ -84,7 +84,7 @@ public class TKSegmentedControl: UISegmentedControl, BackgroundColourThemeable, 
     
     // MARK: Inspectable Properties
     
-    public var backgroundColourStyleId:String? {
+    open var backgroundColourStyleId:String? {
         get {
             return backgroundColourStyle?.rawValue
         }
@@ -98,7 +98,7 @@ public class TKSegmentedControl: UISegmentedControl, BackgroundColourThemeable, 
         }
     }
 
-    public var tintColourStyleId:String? {
+    open var tintColourStyleId:String? {
         get {
             return tintColourStyle?.rawValue
         }
@@ -112,7 +112,7 @@ public class TKSegmentedControl: UISegmentedControl, BackgroundColourThemeable, 
         }
     }
 
-    public var textStyleId:String? {
+    open var textStyleId:String? {
         set {
             if let idString = newValue,
                 let style = TextStyle(rawValue:idString) {
@@ -124,7 +124,7 @@ public class TKSegmentedControl: UISegmentedControl, BackgroundColourThemeable, 
         }
     }
     
-    public var textColourStyleId:String? {
+    open var textColourStyleId:String? {
         set {
             if let idString = newValue,
                 let style = ColourStyle(rawValue:idString) {

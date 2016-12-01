@@ -9,30 +9,30 @@
 import UIKit
 
 @IBDesignable
-public class TKSwitch:UISwitch, Themeable, ThumbTintColourThemeable {
+open class TKSwitch:UISwitch, Themeable, ThumbTintColourThemeable {
     
      
     
     // - initWithFrame(_:) support
-    public var createdFromNib:Bool = false
+    open var createdFromNib:Bool = false
     
-    public override func awakeFromNib() {
+    open override func awakeFromNib() {
         super.awakeFromNib()
         
         createdFromNib = true
     }
     
-    public override func didMoveToSuperview() {
+    open override func didMoveToSuperview() {
             super.didMoveToSuperview()
         
-        if let theme = theme() where !createdFromNib {
+        if let theme = theme(), !createdFromNib {
             applyTheme(theme)
         }
     }
     
     // --
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         
         updateThemeIfNeeded()
@@ -43,13 +43,13 @@ public class TKSwitch:UISwitch, Themeable, ThumbTintColourThemeable {
     
     // MARK: - Theme Properties
     
-    public var thumbTintColourStyle:ColourStyle?  {
+    open var thumbTintColourStyle:ColourStyle?  {
         didSet {
             checkAndUpdateColourStyle(oldValue, thumbTintColourStyle)
         }
     }
     
-    public var onTintColourStyle:ColourStyle?  {
+    open var onTintColourStyle:ColourStyle?  {
         didSet {
             if oldValue != onTintColourStyle {
                 setNeedsUpdateTheme()
@@ -59,7 +59,7 @@ public class TKSwitch:UISwitch, Themeable, ThumbTintColourThemeable {
     
     // MARK: Inspectable Properties
     
-    public var thumbTintColourStyleId:String? {
+    open var thumbTintColourStyleId:String? {
         set {
             if let idString = newValue,
                 let style = ColourStyle(rawValue: idString) {
@@ -71,7 +71,7 @@ public class TKSwitch:UISwitch, Themeable, ThumbTintColourThemeable {
         }
     }
     
-    public var onTintColourId:String? {
+    open var onTintColourId:String? {
         set {
             if let idString = newValue,
                 let style = ColourStyle(rawValue: idString) {
@@ -86,7 +86,7 @@ public class TKSwitch:UISwitch, Themeable, ThumbTintColourThemeable {
     
     // MARK: Theme Functions
     
-    public func applyTheme(theme: Theme) {
+    open func applyTheme(_ theme: Theme) {
         
         applyProtocolThemes(theme)
         

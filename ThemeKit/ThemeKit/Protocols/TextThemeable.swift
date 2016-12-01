@@ -36,13 +36,13 @@ public protocol TextThemeable: Themeable {
     
     var textColourStyleId:String?  { get set }
     
-    func applyTextTheme(theme:Theme)
+    func applyTextTheme(_ theme:Theme)
 
 }
 
 public extension TextThemeable where Self:Textable {
     
-    func applyTextTheme(theme:Theme) {
+    func applyTextTheme(_ theme:Theme) {
         
         if let style = textStyle {
             font = theme.font(style)
@@ -56,7 +56,7 @@ public extension TextThemeable where Self:Textable {
 
 public extension TextThemeable where Self:ImplicitTextable {
     
-    func applyTextTheme(theme:Theme) {
+    func applyTextTheme(_ theme:Theme) {
         
         if let style = textStyle {
             font = theme.font(style)

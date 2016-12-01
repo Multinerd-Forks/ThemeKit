@@ -23,13 +23,13 @@ public protocol ThumbTintColourThemeable: Themeable {
     
     var thumbTintColourStyleId:String? { get set }
     
-    func applyThumbTintTheme(theme:Theme)
+    func applyThumbTintTheme(_ theme:Theme)
     
 }
 
 public extension ThumbTintColourThemeable where Self: ThumbTint {
     
-    public func applyThumbTintTheme(theme:Theme) {
+    public func applyThumbTintTheme(_ theme:Theme) {
         if let style = thumbTintColourStyle {
             thumbTintColor = theme.colour(style)
         }

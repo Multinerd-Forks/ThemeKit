@@ -8,30 +8,30 @@
 
 import UIKit
 
-public class TKLabel: UILabel, BackgroundColourThemeable, TintColourThemeable, TextThemeable {
+open class TKLabel: UILabel, BackgroundColourThemeable, TintColourThemeable, TextThemeable {
     
      
     
     // - initWithFrame(_:) support
-    public var createdFromNib:Bool = false
+    open var createdFromNib:Bool = false
     
-    public override func awakeFromNib() {
+    open override func awakeFromNib() {
         super.awakeFromNib()
         
         createdFromNib = true
     }
     
-     public override func didMoveToSuperview() {
+     open override func didMoveToSuperview() {
             super.didMoveToSuperview()
         
-        if let theme = theme() where !createdFromNib {
+        if let theme = theme(), !createdFromNib {
             applyTheme(theme)
         }
     }
     
     // --
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         
         updateThemeIfNeeded()
@@ -39,25 +39,25 @@ public class TKLabel: UILabel, BackgroundColourThemeable, TintColourThemeable, T
     
     // MARK:- Theme Properties
     
-    public var textStyle:TextStyle?  {
+    open var textStyle:TextStyle?  {
         didSet {
             checkAndUpdateTextStyle(oldValue, textStyle)
         }
     }
     
-    public var textColourStyle:ColourStyle?  {
+    open var textColourStyle:ColourStyle?  {
         didSet {
             checkAndUpdateColourStyle(oldValue, textColourStyle)
         }
     }
     
-    public var backgroundColourStyle:ColourStyle? {
+    open var backgroundColourStyle:ColourStyle? {
         didSet {
             checkAndUpdateColourStyle(oldValue, backgroundColourStyle)
         }
     }
     
-    public var tintColourStyle:ColourStyle? {
+    open var tintColourStyle:ColourStyle? {
         didSet {
             checkAndUpdateColourStyle(oldValue, tintColourStyle)
         }
@@ -65,7 +65,7 @@ public class TKLabel: UILabel, BackgroundColourThemeable, TintColourThemeable, T
     
     // MARK: Inspectable Properties
     
-    public var backgroundColourStyleId:String? {
+    open var backgroundColourStyleId:String? {
         get {
             return backgroundColourStyle?.rawValue
         }
@@ -79,7 +79,7 @@ public class TKLabel: UILabel, BackgroundColourThemeable, TintColourThemeable, T
         }
     }
 
-    public var tintColourStyleId:String? {
+    open var tintColourStyleId:String? {
         get {
             return tintColourStyle?.rawValue
         }
@@ -93,7 +93,7 @@ public class TKLabel: UILabel, BackgroundColourThemeable, TintColourThemeable, T
         }
     }
 
-    public var textStyleId:String? {
+    open var textStyleId:String? {
         set {
             if let idString = newValue,
                 let style = TextStyle(rawValue:idString) {
@@ -105,7 +105,7 @@ public class TKLabel: UILabel, BackgroundColourThemeable, TintColourThemeable, T
         }
     }
     
-    public var textColourStyleId:String? {
+    open var textColourStyleId:String? {
         set {
             if let idString = newValue,
                 let style = ColourStyle(rawValue:idString) {

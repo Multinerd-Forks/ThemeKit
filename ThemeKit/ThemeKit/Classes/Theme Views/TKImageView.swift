@@ -8,30 +8,30 @@
 
 import UIKit
 
-public class TKImageView: UIImageView, BackgroundColourThemeable, TintColourThemeable {
+open class TKImageView: UIImageView, BackgroundColourThemeable, TintColourThemeable {
     
      
     
     // - initWithFrame(_:) support
-    public var createdFromNib:Bool = false
+    open var createdFromNib:Bool = false
     
-    public override func awakeFromNib() {
+    open override func awakeFromNib() {
         super.awakeFromNib()
         
         createdFromNib = true
     }
     
-    public override func didMoveToSuperview() {
+    open override func didMoveToSuperview() {
         super.didMoveToSuperview()
         
-        if let theme = theme() where !createdFromNib {
+        if let theme = theme(), !createdFromNib {
             applyTheme(theme)
         }
     }
     
     // --
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         
         updateThemeIfNeeded()
@@ -39,13 +39,13 @@ public class TKImageView: UIImageView, BackgroundColourThemeable, TintColourThem
     
     // MARK: Themeable Properties
     
-    public var tintColourStyle:ColourStyle? {
+    open var tintColourStyle:ColourStyle? {
         didSet {
             checkAndUpdateColourStyle(oldValue, tintColourStyle)
         }
     }
     
-    public var backgroundColourStyle:ColourStyle? {
+    open var backgroundColourStyle:ColourStyle? {
         didSet {
             checkAndUpdateColourStyle(oldValue, backgroundColourStyle)
         }
@@ -53,7 +53,7 @@ public class TKImageView: UIImageView, BackgroundColourThemeable, TintColourThem
     
     // MARK: Inspectable Properties
     
-    public var backgroundColourStyleId:String? {
+    open var backgroundColourStyleId:String? {
         get {
             return backgroundColourStyle?.rawValue
         }
@@ -67,7 +67,7 @@ public class TKImageView: UIImageView, BackgroundColourThemeable, TintColourThem
         }
     }
 
-    public var tintColourStyleId:String? {
+    open var tintColourStyleId:String? {
         get {
             return tintColourStyle?.rawValue
         }

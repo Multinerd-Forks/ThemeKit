@@ -8,30 +8,30 @@
 
 import UIKit
 
-public class TKSlider: UISlider, ThumbTintColourThemeable {
+open class TKSlider: UISlider, ThumbTintColourThemeable {
     
      
     
     // - initWithFrame(_:) support
-    public var createdFromNib:Bool = false
+    open var createdFromNib:Bool = false
     
-    public override func awakeFromNib() {
+    open override func awakeFromNib() {
         super.awakeFromNib()
         
         createdFromNib = true
     }
     
-    public override func didMoveToSuperview() {
+    open override func didMoveToSuperview() {
         super.didMoveToSuperview()
         
-        if let theme = theme() where !createdFromNib {
+        if let theme = theme(), !createdFromNib {
             applyTheme(theme)
         }
     }
     
     // --
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         
         updateThemeIfNeeded()
@@ -39,7 +39,7 @@ public class TKSlider: UISlider, ThumbTintColourThemeable {
     
     // MARK: - Theme Properties
     
-    public var thumbTintColourStyle:ColourStyle? {
+    open var thumbTintColourStyle:ColourStyle? {
         didSet {
             checkAndUpdateColourStyle(oldValue, thumbTintColourStyle)
         }
@@ -47,13 +47,13 @@ public class TKSlider: UISlider, ThumbTintColourThemeable {
     
     // MARK: Custom Theme Properties
     
-    public var minimumTrackTintColourStyle:ColourStyle? {
+    open var minimumTrackTintColourStyle:ColourStyle? {
         didSet {
             checkAndUpdateColourStyle(oldValue, minimumTrackTintColourStyle)
         }
     }
     
-    public var maximumTrackTintColourStyle:ColourStyle? {
+    open var maximumTrackTintColourStyle:ColourStyle? {
         didSet {
             checkAndUpdateColourStyle(oldValue, minimumTrackTintColourStyle)
         }
@@ -61,7 +61,7 @@ public class TKSlider: UISlider, ThumbTintColourThemeable {
     
     // MARK: Inspectable Properties
     
-    public var thumbTintColourStyleId:String? {
+    open var thumbTintColourStyleId:String? {
         set {
             if let idString = newValue,
                 let style = ColourStyle(rawValue: idString) {
@@ -73,7 +73,7 @@ public class TKSlider: UISlider, ThumbTintColourThemeable {
         }
     }
     
-    public var minimumTrackTintColourStyleId:String? {
+    open var minimumTrackTintColourStyleId:String? {
         set {
             if let idString = newValue,
                 let style = ColourStyle(rawValue: idString) {
@@ -85,7 +85,7 @@ public class TKSlider: UISlider, ThumbTintColourThemeable {
         }
     }
     
-    public var maximumTrackTintColourStyleId:String? {
+    open var maximumTrackTintColourStyleId:String? {
         set {
             if let idString = newValue,
                 let style = ColourStyle(rawValue: idString) {
@@ -100,7 +100,7 @@ public class TKSlider: UISlider, ThumbTintColourThemeable {
     
     // MARK: Custom Apply Theme
     
-    public func applyTheme(theme: Theme) {
+    open func applyTheme(_ theme: Theme) {
         
         applyProtocolThemes(theme)
         

@@ -13,9 +13,9 @@ public func fontDump() {
     
     var fontsString:String = ""
     
-    for familyName in UIFont.familyNames() {
+    for familyName in UIFont.familyNames {
         fontsString += familyName + ":\n"
-        for fontName in UIFont.fontNamesForFamilyName(familyName) {
+        for fontName in UIFont.fontNames(forFamilyName: familyName) {
             fontsString += "  " + fontName + "\n"
         }
         
@@ -25,7 +25,7 @@ public func fontDump() {
 
 
 /// Method to consistently print errors to the console.
-internal func TKLogError(from:Any, function:String, message:String) {
+internal func TKLogError(_ from:Any, function:String, message:String) {
     
-    print("WARNING: [\(from.dynamicType), \(function)]: \(message)")
+    print("WARNING: [\(type(of: (from) as AnyObject)), \(function)]: \(message)")
 }

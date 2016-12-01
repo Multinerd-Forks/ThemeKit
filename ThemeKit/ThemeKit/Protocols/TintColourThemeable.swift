@@ -14,12 +14,12 @@ public protocol TintColourThemeable: Themeable {
     
     var tintColourStyleId:String? { get set }
     
-    func applyTintTheme(theme:Theme)
+    func applyTintTheme(_ theme:Theme)
 }
 
 public extension TintColourThemeable where Self:UIView {
     
-    public func applyTintTheme(theme: Theme) {
+    public func applyTintTheme(_ theme: Theme) {
         if let tintStyle = tintColourStyle {
             tintColor = theme.colour(tintStyle)
         }

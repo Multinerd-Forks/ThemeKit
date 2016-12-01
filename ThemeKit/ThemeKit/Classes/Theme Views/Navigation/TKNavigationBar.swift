@@ -8,30 +8,30 @@
 
 import UIKit
 
-public class TKNavigationBar: UINavigationBar, BarThemeable, TextThemeable {
+open class TKNavigationBar: UINavigationBar, BarThemeable, TextThemeable {
     
      
     
     // - initWithFrame(_:) support
-    public var createdFromNib:Bool = false
+    open var createdFromNib:Bool = false
     
-    public override func awakeFromNib() {
+    open override func awakeFromNib() {
         super.awakeFromNib()
         
         createdFromNib = true
     }
     
-    public override func didMoveToSuperview() {
+    open override func didMoveToSuperview() {
         super.didMoveToSuperview()
         
-        if let theme = theme() where !createdFromNib {
+        if let theme = theme(), !createdFromNib {
             applyTheme(theme)
         }
     }
     
     // --
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         
         updateThemeIfNeeded()
@@ -39,21 +39,21 @@ public class TKNavigationBar: UINavigationBar, BarThemeable, TextThemeable {
     
     // MARK: - Themeable Properties
     
-    public var tintColourStyle:ColourStyle? {
+    open var tintColourStyle:ColourStyle? {
         didSet {
             checkAndUpdateColourStyle(oldValue, tintColourStyle)
         }
     }
     
     /// Styles the font for this `UINavigationBar`'s `titleTextAttributes`.
-    public var textStyle:TextStyle?  {
+    open var textStyle:TextStyle?  {
         didSet {
             checkAndUpdateTextStyle(oldValue, textStyle)
         }
     }
     
     /// Styles the font colour for this `UINavigationBar`'s `titleTextAttributes`.
-    public var textColourStyle:ColourStyle?  {
+    open var textColourStyle:ColourStyle?  {
         didSet {
             if oldValue != textColourStyle {
                 setNeedsUpdateTheme()
@@ -62,7 +62,7 @@ public class TKNavigationBar: UINavigationBar, BarThemeable, TextThemeable {
     }
     
     /// Styles this `UINavigationBar`'s `barTintColor`.
-    public var barTintColourStyle:ColourStyle?  {
+    open var barTintColourStyle:ColourStyle?  {
         didSet {
             if oldValue != barTintColourStyle {
                 setNeedsUpdateTheme()
@@ -72,7 +72,7 @@ public class TKNavigationBar: UINavigationBar, BarThemeable, TextThemeable {
     
     // MARK: Inspectable Properties
     
-    public var tintColourStyleId:String? {
+    open var tintColourStyleId:String? {
         get {
             return tintColourStyle?.rawValue
         }
@@ -86,7 +86,7 @@ public class TKNavigationBar: UINavigationBar, BarThemeable, TextThemeable {
         }
     }
 
-    public var textStyleId:String? {
+    open var textStyleId:String? {
         set {
             if let idString = newValue,
                 let style = TextStyle(rawValue:idString) {
@@ -98,7 +98,7 @@ public class TKNavigationBar: UINavigationBar, BarThemeable, TextThemeable {
         }
     }
     
-    public var textColourStyleId:String? {
+    open var textColourStyleId:String? {
         set {
             if let idString = newValue,
                 let style = ColourStyle(rawValue:idString) {
@@ -110,7 +110,7 @@ public class TKNavigationBar: UINavigationBar, BarThemeable, TextThemeable {
         }
     }
     
-    public var barTintColourStyleId:String? {
+    open var barTintColourStyleId:String? {
         set {
             if let idString = newValue,
                 let style = ColourStyle(rawValue:idString) {
@@ -125,7 +125,7 @@ public class TKNavigationBar: UINavigationBar, BarThemeable, TextThemeable {
 
     // MARK: Theme Functions
     
-    public func applyTextTheme(theme: Theme) {
+    open func applyTextTheme(_ theme: Theme) {
         // apply the title text attributes
         var attributes = self.titleTextAttributes ?? [String:AnyObject]()
         
@@ -140,7 +140,7 @@ public class TKNavigationBar: UINavigationBar, BarThemeable, TextThemeable {
         titleTextAttributes = attributes
     }
     
-    public func applyTheme(theme:Theme) {
+    open func applyTheme(_ theme:Theme) {
         
         applyProtocolThemes(theme)
         

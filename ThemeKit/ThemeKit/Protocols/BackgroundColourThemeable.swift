@@ -13,12 +13,12 @@ public protocol BackgroundColourThemeable: Themeable {
     var backgroundColourStyle:ColourStyle? { get set }
     var backgroundColourStyleId:String? { get set }
     
-    func applyBackgroundTheme(theme:Theme)
+    func applyBackgroundTheme(_ theme:Theme)
 }
 
 public extension BackgroundColourThemeable where Self:UIView {
     
-    public func applyBackgroundTheme(theme: Theme) {
+    public func applyBackgroundTheme(_ theme: Theme) {
         if let bgStyle = backgroundColourStyle {
             backgroundColor = theme.colour(bgStyle)
         }

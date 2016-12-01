@@ -45,31 +45,31 @@ public enum TextStyle: Hashable, RawRepresentable {
     // MARK: Cases
     
     /// Display Text Styles: Typically used for large titles, results, or main data labels. Size increase with number i.e.. `Display4` > `Display3`.
-    case Display4, Display3, Display2, Display1
+    case display4, display3, display2, display1
     
     /// Typically a large font used for page headings.
-    case Headline
+    case headline
     
     /// Typically a medium sized font used for element titles such as `UITableViewCell` and `UICollectionViewCell` titles.
-    case Title
+    case title
     
     /// Typically a medium sized font used to distinguish sub-elements within a page `UITableView` and `UICollectionView` section headings.
-    case SubHeadline
+    case subHeadline
     
     /// Typically a readable sans serif font.
-    case Body1
+    case body1
     
     /// Typically a bold or italic veriant of Body1 allowing for text highlights.
-    case Body2
+    case body2
     
     /// Typically the smallest font, used for `UITabBarItems` and small, ancillary text.
-    case Caption
+    case caption
     
     /// Typically a font that is similar to `Body1` and `Body2` that is clearly a call to action to help ensure the button stands out as interactable.
-    case Button
+    case button
     
     /// A unique style defined by the programmer in circumstances where the default [Google Material Design](https://www.google.com/design/spec/style/typography.html#typography-styles) selection is insufficient.
-    case Custom(String)
+    case custom(String)
     
     // MARK: Initialisers
     
@@ -83,29 +83,29 @@ public enum TextStyle: Hashable, RawRepresentable {
     public init?(rawValue: String) {
         switch rawValue{
         case Display4Raw:
-            self = Display4
+            self = .display4
         case Display3Raw:
-            self = Display3
+            self = .display3
         case Display2Raw:
-            self = Display2
+            self = .display2
         case Display1Raw:
-            self = Display1
+            self = .display1
         case HeadlineRaw:
-            self = Headline
+            self = .headline
         case TitleRaw:
-            self = Title
+            self = .title
         case SubHeadlineRaw:
-            self = SubHeadline
+            self = .subHeadline
         case Body1Raw:
-            self = Body1
+            self = .body1
         case Body2Raw:
-            self = Body2
+            self = .body2
         case CaptionRaw:
-            self = Caption
+            self = .caption
         case ButtonRaw:
-            self = Button
+            self = .button
         default:
-            self = .Custom(rawValue)
+            self = .custom(rawValue)
         }
     }
     
@@ -120,29 +120,29 @@ public enum TextStyle: Hashable, RawRepresentable {
      */
     public var rawValue:String {
         switch self {
-        case Display4:
+        case .display4:
             return Display4Raw
-        case Display3:
+        case .display3:
             return Display3Raw
-        case Display2:
+        case .display2:
             return Display2Raw
-        case Display1:
+        case .display1:
             return Display1Raw
-        case Headline:
+        case .headline:
             return HeadlineRaw
-        case Title:
+        case .title:
             return TitleRaw
-        case SubHeadline:
+        case .subHeadline:
             return SubHeadlineRaw
-        case Body1:
+        case .body1:
             return Body1Raw
-        case Body2:
+        case .body2:
             return Body2Raw
-        case Caption:
+        case .caption:
             return CaptionRaw
-        case Button:
+        case .button:
             return ButtonRaw
-        case Custom(let str):
+        case .custom(let str):
             return str
         }
     }

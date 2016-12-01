@@ -43,10 +43,10 @@ public enum ColourStyle: Hashable, RawRepresentable {
     
     public typealias RawValue = String
     
-    case AccentLight, Accent, AccentDark
-    case MainLight, Main, MainDark
-    case Text, SecondaryText, LightText, SecondaryLightText
-    case Custom(String)
+    case accentLight, accent, accentDark
+    case mainLight, main, mainDark
+    case text, secondaryText, lightText, secondaryLightText
+    case custom(String)
     
     // MARK: Initialisers
     
@@ -61,27 +61,27 @@ public enum ColourStyle: Hashable, RawRepresentable {
         
         switch rawValue {
         case AccentLightRaw:
-            self = AccentLight
+            self = .accentLight
         case AccentRaw:
-            self = Accent
+            self = .accent
         case AccentDarkRaw:
-            self = AccentDark
+            self = .accentDark
         case MainLightRaw:
-            self = MainLight
+            self = .mainLight
         case MainRaw:
-            self = Main
+            self = .main
         case MainDarkRaw:
-            self = MainDark
+            self = .mainDark
         case TextRaw:
-            self = Text
+            self = .text
         case SecondaryTextRaw:
-            self = SecondaryText
+            self = .secondaryText
         case LightTextRaw:
-            self = LightText
+            self = .lightText
         case SecondaryLightTextRaw:
-            self = SecondaryLightText
+            self = .secondaryLightText
         default:
-            self = .Custom(rawValue)
+            self = .custom(rawValue)
         }
     }
     
@@ -96,27 +96,27 @@ public enum ColourStyle: Hashable, RawRepresentable {
      */
     public var rawValue:String {
         switch self {
-        case AccentLight:
+        case .accentLight:
             return AccentLightRaw
-        case Accent:
+        case .accent:
             return AccentRaw
-        case AccentDark:
+        case .accentDark:
             return AccentDarkRaw
-        case MainLight:
+        case .mainLight:
             return MainLightRaw
-        case Main:
+        case .main:
             return MainRaw
-        case MainDark:
+        case .mainDark:
             return MainDarkRaw
-        case Text:
+        case .text:
             return TextRaw
-        case SecondaryText:
+        case .secondaryText:
             return SecondaryTextRaw
-        case LightText:
+        case .lightText:
             return LightTextRaw
-        case SecondaryLightText:
+        case .secondaryLightText:
             return SecondaryLightTextRaw
-        case .Custom(let str):
+        case .custom(let str):
             return str
         }
     }

@@ -9,14 +9,14 @@
 import UIKit
 
 @IBDesignable
-public class TKBarButtonItem: UIBarButtonItem, TextThemeable {
+open class TKBarButtonItem: UIBarButtonItem, TextThemeable {
     
      
     
     // - initWithFrame(_:) support
-    public var createdFromNib:Bool = false
+    open var createdFromNib:Bool = false
     
-    public override func awakeFromNib() {
+    open override func awakeFromNib() {
         super.awakeFromNib()
         
         createdFromNib = true
@@ -24,13 +24,13 @@ public class TKBarButtonItem: UIBarButtonItem, TextThemeable {
     
     // MARK: Themeable
     
-    public var textStyle:TextStyle?  {
+    open var textStyle:TextStyle?  {
         didSet {
             checkAndUpdateTextStyle(oldValue, textStyle)
         }
     }
     
-    public var textColourStyle:ColourStyle?  {
+    open var textColourStyle:ColourStyle?  {
         didSet {
             checkAndUpdateColourStyle(oldValue, textColourStyle)
         }
@@ -38,7 +38,7 @@ public class TKBarButtonItem: UIBarButtonItem, TextThemeable {
     
     // MARK: Inspectable
     
-    public var textStyleId:String? {
+    open var textStyleId:String? {
         set {
             if let idString = newValue,
                 let style = TextStyle(rawValue:idString) {
@@ -50,7 +50,7 @@ public class TKBarButtonItem: UIBarButtonItem, TextThemeable {
         }
     }
     
-    public var textColourStyleId:String? {
+    open var textColourStyleId:String? {
         set {
             if let idString = newValue,
                 let style = ColourStyle(rawValue:idString) {

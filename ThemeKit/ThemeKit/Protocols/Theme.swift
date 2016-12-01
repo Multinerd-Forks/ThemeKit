@@ -9,7 +9,7 @@
 import UIKit
 
 /// Type specificatoin used only when Theme can specify types for TextStyle and ColourStyle. Currently this results in in a generic UILabel which can't be included in a Storyboard.
-public typealias RawRepresentableKey = protocol<RawRepresentable, Hashable>
+public typealias RawRepresentableKey = RawRepresentable & Hashable
 
 public protocol Theme {
     
@@ -28,16 +28,16 @@ public protocol Theme {
 
     - seealso: MaterialTheme
     */
-    func fontName(textStyle:TextStyle) -> String
+    func fontName(_ textStyle:TextStyle) -> String
     
-    func font(textStyle:TextStyle, sizeCategory:UIContentSizeCategory?) -> UIFont
+    func font(_ textStyle:TextStyle, sizeCategory:UIContentSizeCategory?) -> UIFont
 
-    func colour(colourStyle:ColourStyle) -> UIColor
+    func colour(_ colourStyle:ColourStyle) -> UIColor
 }
 
 public extension Theme {
     
-    final func fontSize(textStyle:TextStyle, sizeCategory:UIContentSizeCategory) -> CGFloat {
+    final func fontSize(_ textStyle:TextStyle, sizeCategory:UIContentSizeCategory) -> CGFloat {
         
         var fontSize:CGFloat
         if let size = defaultTextSizes[textStyle] {
@@ -56,33 +56,33 @@ public extension Theme {
     
     public func currentContentSizeCategory() -> UIContentSizeCategory {
         
-        let preferredContentSize = UIApplication.sharedApplication().preferredContentSizeCategory
-        if let currentContentSize = UIContentSizeCategory(contentSize: preferredContentSize) {
-            return currentContentSize
+        let preferredContentSize = UIApplication.shared.preferredContentSizeCategory
+        if TKContentSizeCategory(contentSize: preferredContentSize) != nil {
+            return preferredContentSize
         } else {
-            TKLogError(self, function: #function, message: "Unknown current content size category: " + preferredContentSize)
-            return .Large
+            TKLogError(self, function: #function, message: "Unknown current content size category: \(preferredContentSize) ")
+            return .large
         }
     }
     
     
-    public func font(textStyle:TextStyle, sizeCategory:UIContentSizeCategory? = nil) -> UIFont {
+    public func font(_ textStyle:TextStyle, sizeCategory:UIContentSizeCategory? = nil) -> UIFont {
         
         let size = fontSize(textStyle, sizeCategory: sizeCategory ?? currentContentSizeCategory())
         
         guard let font = UIFont(name: fontName(textStyle), size: size) else {
             TKLogError(self, function: #function, message: "No font specified for text style \(textStyle.rawValue). Using system font.")
-            return UIFont.systemFontOfSize(size)
+            return UIFont.systemFont(ofSize: size)
         }
         
         return font
     }
     
-    public func colour(colourStyle:ColourStyle) -> UIColor {
+    public func colour(_ colourStyle:ColourStyle) -> UIColor {
 
         guard let colour = themeColours[colourStyle] else {
             TKLogError(self, function: #function, message: "No colour specified for colour style \(colourStyle.rawValue). Using default Black.")
-            return UIColor.blackColor()
+            return UIColor.black
         }
         
         return colour
