@@ -66,7 +66,7 @@ public extension Theme {
     }
     
     
-    public func font(_ textStyle:TextStyle, sizeCategory:UIContentSizeCategory? = nil) -> UIFont {
+    public func font(_ textStyle:TextStyle, sizeCategory:UIContentSizeCategory? = UIContentSizeCategory.medium) -> UIFont {
         
         let size = fontSize(textStyle, sizeCategory: sizeCategory ?? currentContentSizeCategory())
         

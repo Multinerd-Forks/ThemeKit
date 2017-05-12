@@ -20,7 +20,7 @@ public extension NSAttributedString {
      - parameter textColourStyle: The text colour for this attributed string. Sets the `NSForegroundColorAttributeName` in the `attributes` dictionary.
      - parameter theme: The `Theme` to get the text and colour styles from. Default value is the `defaultTheme` of the current `TKThemeVendor`.
     */
-    public convenience init(string:String, textStyle:TextStyle, sizeCategory:UIContentSizeCategory? = nil, textColourStyle:ColourStyle, theme:Theme? = TKThemeVendor.shared().defaultTheme) {
+    public convenience init(string:String, textStyle:TextStyle, sizeCategory:UIContentSizeCategory? = UIContentSizeCategory.medium, textColourStyle:ColourStyle, theme:Theme? = TKThemeVendor.shared().defaultTheme) {
         
         var attributes = [String: AnyObject]()
         

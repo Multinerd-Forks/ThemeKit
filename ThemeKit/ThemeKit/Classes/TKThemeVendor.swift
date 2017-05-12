@@ -25,7 +25,7 @@ open class TKThemeVendor: NSSingleton {
      
      - returns: Returns the result `font(_:sizeCategory:)` on the `defaultTheme` of the `shared() TKThemeVendor`.
     */
-    open static func defaultFont(_ textStyle:TextStyle, sizeCategory:UIContentSizeCategory?) -> UIFont? {
+    open static func defaultFont(_ textStyle:TextStyle, sizeCategory:UIContentSizeCategory? = UIContentSizeCategory.medium) -> UIFont? {
       
         return TKThemeVendor.shared().defaultTheme?.font(textStyle, sizeCategory: sizeCategory)
     }
