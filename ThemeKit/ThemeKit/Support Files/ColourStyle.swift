@@ -10,19 +10,19 @@ import UIKit
 
 // Private String for the RawRepresentable value of `ColourStyle`s.
 
-private let AccentLightRaw = "AccentLight"
-private let AccentRaw = "Accent"
-private let AccentDarkRaw = "AccentDark"
+private let AccentLightRaw = "accentLight"
+private let AccentRaw = "accent"
+private let AccentDarkRaw = "accentDark"
 
-private let MainLightRaw = "MainLight"
-private let MainRaw = "Main"
-private let MainDarkRaw = "MainDark"
+private let MainLightRaw = "mainLight"
+private let MainRaw = "main"
+private let MainDarkRaw = "mainDark"
 
-private let TextRaw = "Text"
-private let SecondaryTextRaw = "SecondaryText"
+private let TextRaw = "text"
+private let SecondaryTextRaw = "secondaryText"
 
-private let LightTextRaw = "LightText"
-private let SecondaryLightTextRaw = "SecondaryLightText"
+private let LightTextRaw = "lightText"
+private let SecondaryLightTextRaw = "secondaryLightText"
 
 /**
  

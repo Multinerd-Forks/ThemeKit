@@ -10,17 +10,17 @@ import UIKit
 
 // Private String for the RawRepresentable value of `TextStyle`s.
 
-private let Display4Raw = "Display4"
-private let Display3Raw = "Display3"
-private let Display2Raw = "Display2"
-private let Display1Raw = "Display1"
-private let HeadlineRaw = "Headline"
-private let TitleRaw = "Title"
-private let SubHeadlineRaw = "SubHeadline"
-private let Body1Raw = "Body1"
-private let Body2Raw = "Body2"
-private let CaptionRaw = "Caption"
-private let ButtonRaw = "Button"
+private let Display4Raw = "display4"
+private let Display3Raw = "display3"
+private let Display2Raw = "display2"
+private let Display1Raw = "display1"
+private let HeadlineRaw = "headline"
+private let TitleRaw = "title"
+private let SubHeadlineRaw = "subHeadline"
+private let Body1Raw = "body1"
+private let Body2Raw = "body2"
+private let CaptionRaw = "caption"
+private let ButtonRaw = "button"
 
 /**
  
