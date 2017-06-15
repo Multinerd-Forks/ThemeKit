@@ -90,6 +90,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5A17984D1EF284CE00873C12 /* ThemeKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = ThemeKit.podspec; path = ../ThemeKit.podspec; sourceTree = "<group>"; };
 		A505D5291B6E154E00AAD861 /* UIView+TKExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+TKExtensions.swift"; path = "Extensions/UIView+TKExtensions.swift"; sourceTree = "<group>"; };
 		A505D52B1B6E157600AAD861 /* UISearchBar+TKExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UISearchBar+TKExtensions.swift"; path = "Extensions/UISearchBar+TKExtensions.swift"; sourceTree = "<group>"; };
 		A5105AF21CC21F6200ED38CB /* Encryption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Encryption.swift; sourceTree = "<group>"; };
@@ -199,6 +200,7 @@
 		A59A6CBB1B4AB9B100F708DC = {
 			isa = PBXGroup;
 			children = (
+				5A17984D1EF284CE00873C12 /* ThemeKit.podspec */,
 				A582E0D01C5CC3EB000F22AB /* ThemeKitDemo */,
 				A59A6CC71B4AB9B100F708DC /* ThemeKit */,
 				A59A6CD31B4AB9B100F708DC /* ThemeKitTests */,
