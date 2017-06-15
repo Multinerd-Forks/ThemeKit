@@ -17,6 +17,8 @@ open class TKTextField: UITextField, BackgroundColourThemeable, TintColourThemea
     
     // - initWithFrame(_:) support
     open var createdFromNib:Bool = false
+
+    open var placeholderRect: CGRect = .zero
     
     open override func awakeFromNib() {
         
@@ -277,9 +279,18 @@ open class TKTextField: UITextField, BackgroundColourThemeable, TintColourThemea
         
 //        print("placeholder: \(superRect) -> \(textRect)")
         
-        return textRect
+        self.placeholderRect = CGRect(x: textRect.origin.x, y: (textRect.size.height - self.font!.lineHeight)/2, width: textRect.size.width, height: self.font!.lineHeight)
+
+        return self.placeholderRect
     }
-    
+
+    override open func caretRect(for position: UITextPosition) -> CGRect {
+
+        let rect = super.caretRect(for: position)
+
+        return CGRect(x: rect.origin.x, y: self.placeholderRect.origin.y, width: rect.size.width, height: self.font!.lineHeight)
+        
+    }
     
     open var textInsets:UIEdgeInsets = TKDefaultInsets  {
         didSet {
