@@ -279,7 +279,7 @@ open class TKTextField: UITextField, BackgroundColourThemeable, TintColourThemea
         
 //        print("placeholder: \(superRect) -> \(textRect)")
         
-        self.placeholderRect = CGRect(x: textRect.origin.x, y: (textRect.size.height - self.font!.lineHeight)/2, width: textRect.size.width, height: self.font!.lineHeight)
+        self.placeholderRect = CGRect(x: textRect.origin.x, y: (textRect.size.height - self.font!.lineHeight)/1.6, width: textRect.size.width, height: self.font!.lineHeight)
 
         return self.placeholderRect
     }
@@ -288,7 +288,7 @@ open class TKTextField: UITextField, BackgroundColourThemeable, TintColourThemea
 
         let rect = super.caretRect(for: position)
 
-        return CGRect(x: rect.origin.x, y: self.placeholderRect.origin.y, width: rect.size.width, height: self.font!.lineHeight)
+        return CGRect(x: rect.origin.x, y: self.placeholderRect.origin.y, width: rect.size.width, height: self.font!.lineHeight/1.2)
         
     }
     
