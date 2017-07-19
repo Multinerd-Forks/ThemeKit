@@ -274,7 +274,7 @@ open class TKTextField: UITextField, BackgroundColourThemeable, TintColourThemea
     
     func computePlaceholderRect() {
         let textRect = self.textRect(forBounds: bounds)
-        self.placeholderRect = CGRect(x: textRect.origin.x, y: (textRect.size.height - self.font!.lineHeight)/1.6, width: textRect.size.width, height: self.font!.lineHeight)
+        self.placeholderRect = CGRect(x: textRect.origin.x, y: (bounds.size.height - self.font!.lineHeight)/2.2, width: textRect.size.width, height: self.font!.lineHeight)
     }
 
     override open func placeholderRect(forBounds bounds: CGRect) -> CGRect {
