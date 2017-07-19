@@ -272,24 +272,24 @@ open class TKTextField: UITextField, BackgroundColourThemeable, TintColourThemea
         return textRect(forBounds: bounds)
     }
     
-    override open func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-        
-        // let superRect = super.placeholderRectForBounds(bounds)
+    func computePlaceholderRect() {
         let textRect = self.textRect(forBounds: bounds)
-        
-//        print("placeholder: \(superRect) -> \(textRect)")
-        
         self.placeholderRect = CGRect(x: textRect.origin.x, y: (textRect.size.height - self.font!.lineHeight)/1.6, width: textRect.size.width, height: self.font!.lineHeight)
+    }
 
+    override open func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+
+        // let superRect = super.placeholderRectForBounds(bounds)
+        computePlaceholderRect()
         return self.placeholderRect
     }
 
     override open func caretRect(for position: UITextPosition) -> CGRect {
 
         let rect = super.caretRect(for: position)
-
+        computePlaceholderRect()
         return CGRect(x: rect.origin.x, y: self.placeholderRect.origin.y, width: rect.size.width, height: self.font!.lineHeight/1.2)
-        
+
     }
     
     open var textInsets:UIEdgeInsets = TKDefaultInsets  {
