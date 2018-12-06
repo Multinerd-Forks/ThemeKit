@@ -37,7 +37,7 @@ public protocol Theme {
 
 public extension Theme {
     
-    final func fontSize(_ textStyle:TextStyle, sizeCategory:UIContentSizeCategory) -> CGFloat {
+    public func fontSize(_ textStyle:TextStyle, sizeCategory:UIContentSizeCategory) -> CGFloat {
         
         var fontSize:CGFloat
         if let size = defaultTextSizes[textStyle] {

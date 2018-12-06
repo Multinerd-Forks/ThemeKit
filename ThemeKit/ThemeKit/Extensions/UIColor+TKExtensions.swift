@@ -39,37 +39,37 @@ public extension UIColor {
         var hexString = hex
         var alpha = a
         
-        if ((hexString.characters.count == 8 || hexString.characters.count == 6) && hexString.characters.first != "#") {
+        if ((hexString.count == 8 || hexString.count == 6) && hexString.first != "#") {
             hexString = "#\(hexString)"
         }
         
-        if (hexString.characters.first != "#") {
+        if (hexString.first != "#") {
             print("Hex color requires a '#' as the first character.")
             return nil
         }
         
-        if (hexString.characters.count == 9) {
-            let alphaRange = hexString.characters.index(hexString.startIndex, offsetBy: 1)..<hexString.characters.index(hexString.startIndex, offsetBy: 2)
+        if (hexString.count == 9) {
+            let alphaRange = hexString.index(hexString.startIndex, offsetBy: 1)..<hexString.index(hexString.startIndex, offsetBy: 2)
             
-            let opacityString = hexString.substring(with: alphaRange)
+            let opacityString = hexString[alphaRange]
             
             var alphaInt:UInt32 = 0
-            let rScanner = Scanner(string: opacityString);
+            let rScanner = Scanner(string: String(opacityString));
             rScanner.scanHexInt32(&alphaInt)
             alpha = CGFloat(alphaInt) / 255.0;
             
-            let remainingRange = hexString.characters.index(hexString.startIndex, offsetBy: 3)..<hexString.endIndex
-            hexString = "#\(hexString.substring(with: remainingRange))"
+            let remainingRange = hexString.index(hexString.startIndex, offsetBy: 3)..<hexString.endIndex
+            hexString = "#\(hexString[remainingRange]))"
         }
         
-        if (hexString.characters.count != 7) {
+        if (hexString.count != 7) {
             print("Requeire hex string of length 7 to create a color.")
             return nil;
         }
         
         let rgb:[CGFloat] = [(1,2), (3, 4), (5,6)]
-            .map({ hexString.characters.index(hexString.startIndex, offsetBy: $0.0)..<hexString.characters.index(hexString.startIndex, offsetBy: $0.1) })
-            .map({ hexString.substring(with: $0) })
+            .map({ hexString.index(hexString.startIndex, offsetBy: $0.0)..<hexString.index(hexString.startIndex, offsetBy: $0.1) })
+            .map({ hexString[$0] })
             .map({ "0x\($0)" })
             .map({
                 

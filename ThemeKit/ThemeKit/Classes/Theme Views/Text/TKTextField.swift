@@ -8,7 +8,7 @@
 
 import UIKit
 
-let TKDefaultInsets = UIEdgeInsetsMake(2.0, 7.0, 2.0, 7.0)
+let TKDefaultInsets = UIEdgeInsets(top: 2.0, left: 7.0, bottom: 2.0, right: 7.0)
 
 @IBDesignable
 open class TKTextField: UITextField, BackgroundColourThemeable, TintColourThemeable, TextThemeable {
@@ -184,7 +184,7 @@ open class TKTextField: UITextField, BackgroundColourThemeable, TintColourThemea
             return "{\(textInsets.top),\(textInsets.left),\(textInsets.bottom),\(textInsets.right)}"
         } set {
             if let insetsString = newValue {
-                textInsets =  UIEdgeInsetsFromString(insetsString)
+                textInsets =  NSCoder.uiEdgeInsets(for: insetsString)
             }
         }
     }
@@ -202,7 +202,7 @@ open class TKTextField: UITextField, BackgroundColourThemeable, TintColourThemea
                 let text:NSString = self.text as NSString? ?? "Testing Text"
                 let textHeight = text.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude),
                     options: NSStringDrawingOptions.usesLineFragmentOrigin,
-                    attributes: [NSFontAttributeName: myFont],
+                    attributes: [.font: myFont],
                     context: nil).size.height
                 var height = textHeight
                 
@@ -212,7 +212,7 @@ open class TKTextField: UITextField, BackgroundColourThemeable, TintColourThemea
                 if let setPlaceholder = self.attributedPlaceholder {
                     attributedPlaceholder = setPlaceholder
                 } else if let placeholderStyle = placeholderTextStyle {
-                    attributedPlaceholder = NSAttributedString(string: "Testing Placeholder", attributes: [NSFontAttributeName: theme.font(placeholderStyle)])
+                    attributedPlaceholder = NSAttributedString(string: "Testing Placeholder", attributes: [.font: theme.font(placeholderStyle)])
                 } else {
                     attributedPlaceholder = nil
                 }
@@ -294,7 +294,7 @@ open class TKTextField: UITextField, BackgroundColourThemeable, TintColourThemea
     
     open var textInsets:UIEdgeInsets = TKDefaultInsets  {
         didSet {
-            if !UIEdgeInsetsEqualToEdgeInsets(textInsets, oldValue) {
+            if textInsets == oldValue {
                 invalidateIntrinsicContentSize()
                 setNeedsLayout()
             }
@@ -323,11 +323,11 @@ open class TKTextField: UITextField, BackgroundColourThemeable, TintColourThemea
             var attributes = attributedPlaceholder.attributes(at: 0, effectiveRange: nil)
             
             if let placeholderStyle = self.placeholderTextStyle {
-                attributes[NSFontAttributeName] = theme.font(placeholderStyle)
+                attributes[.font] = theme.font(placeholderStyle)
             }
             
             if let placeholderColourStyle = self.placeholderTextColourStyle {
-                attributes[NSForegroundColorAttributeName] = theme.colour(placeholderColourStyle)
+                attributes[.foregroundColor] = theme.colour(placeholderColourStyle)
             }
             
             // Set new text with extracted attributes

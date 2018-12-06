@@ -42,12 +42,12 @@ open class TKSegmentedControl: UISegmentedControl, BackgroundColourThemeable, Ti
     open override var intrinsicContentSize : CGSize {
         let superSize = super.intrinsicContentSize
         
-        if let font = titleTextAttributes(for: self.state)?[NSFontAttributeName] as? UIFont {
+        if let font = titleTextAttributes(for: self.state)?[.font] as? UIFont {
             
             let test:NSString = "Testing"
             let boundingRect = test.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude),
                 options: NSStringDrawingOptions.usesLineFragmentOrigin,
-                attributes: [NSFontAttributeName: font],
+                attributes: [.font: font],
                 context: nil)
             
             return CGSize(width: superSize.width, height: ceil(boundingRect.height) + 2.0 * 7.0)

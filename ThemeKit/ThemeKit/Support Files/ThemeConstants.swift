@@ -22,12 +22,12 @@ import UIKit
       UIFontTextStyleFootnote:      13.0
  
  */
-let AppleFontSizes:[String:CGFloat] = [UIFontTextStyle.body.rawValue: 17.0,
-    UIFontTextStyle.headline.rawValue: 17.0,
-    UIFontTextStyle.subheadline.rawValue: 15.0,
-    UIFontTextStyle.caption1.rawValue: 12.0,
-    UIFontTextStyle.caption2.rawValue: 11.0,
-    UIFontTextStyle.footnote.rawValue: 13.0
+let AppleFontSizes:[String:CGFloat] = [UIFont.TextStyle.body.rawValue: 17.0,
+                                       UIFont.TextStyle.headline.rawValue: 17.0,
+                                       UIFont.TextStyle.subheadline.rawValue: 15.0,
+                                       UIFont.TextStyle.caption1.rawValue: 12.0,
+                                       UIFont.TextStyle.caption2.rawValue: 11.0,
+                                       UIFont.TextStyle.footnote.rawValue: 13.0
 ]
 
 /**

@@ -25,7 +25,7 @@ open class TKThemeVendor: NSSingleton {
      
      - returns: Returns the result `font(_:sizeCategory:)` on the `defaultTheme` of the `shared() TKThemeVendor`.
     */
-    open static func defaultFont(_ textStyle:TextStyle, sizeCategory:UIContentSizeCategory? = UIContentSizeCategory.medium) -> UIFont? {
+    public static func defaultFont(_ textStyle:TextStyle, sizeCategory:UIContentSizeCategory? = UIContentSizeCategory.medium) -> UIFont? {
       
         return TKThemeVendor.shared().defaultTheme?.font(textStyle, sizeCategory: sizeCategory)
     }
@@ -36,7 +36,7 @@ open class TKThemeVendor: NSSingleton {
      
      - returns: Returns the result `colour(_:)` on the `defaultTheme` of the `shared() TKThemeVendor`.
      */
-    open static func defaultColour(_ colourStyle:ColourStyle) -> UIColor? {
+    public static func defaultColour(_ colourStyle:ColourStyle) -> UIColor? {
         return TKThemeVendor.shared().defaultTheme?.colour(colourStyle)
     }
 }

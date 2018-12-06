@@ -38,16 +38,16 @@ struct MyTheme: Theme {
     let textSizeAdjustments = AppleFontAdjustments // default
     
     // Swap These for the colours in you app
-    let themeColours:[ColourStyle:UIColor] = [.Accent: UIColor.yellowColor(),
-                                              .Main: UIColor.redColor(),
-                                              .Text: UIColor.blackColor().colorWithAlphaComponent(0.87),
-                                              .SecondaryText: UIColor.blackColor().colorWithAlphaComponent(0.54),
-                                              .LightText: UIColor.whiteColor().colorWithAlphaComponent(0.87),
-                                              .SecondaryLightText: UIColor.whiteColor().colorWithAlphaComponent(0.54),
+    let themeColours:[ColourStyle:UIColor] = [.accent: UIColor.yellow,
+                                              .main: UIColor.red,
+                                              .text: UIColor.black.withAlphaComponent(0.87),
+                                              .secondaryText: UIColor.black.withAlphaComponent(0.54),
+                                              .lightText: UIColor.white.withAlphaComponent(0.87),
+                                              .secondaryLightText: UIColor.white.withAlphaComponent(0.54),
                                               ]
     
     /// Use standard iOS sans-serif fonts.
-    func fontName(textStye:TextStyle) -> String {
+    func fontName(_ textStye:TextStyle) -> String {
         
         let thinFont:String
         let normalFont:String
@@ -65,21 +65,21 @@ struct MyTheme: Theme {
         
         // --- Replace these values to return branded fonts if applicable.
         switch textStye {
-        case .Display4:
+        case .display4:
             return thinFont
-        case .Display3, .Display2, .Display1:
+        case .display3, .display2, .display1:
             return thinFont
-        case .Headline:
+        case .headline:
             return normalFont
-        case .Title:
+        case .title:
             return mediumFont
-        case .SubHeadline:
+        case .subHeadline:
             return normalFont
-        case .Body2, .Button:
+        case .body2, .button:
             return mediumFont
-        case .Body1, .Custom(_):
+        case .body1, .custom(_):
             return thinFont
-        case .Caption:
+        case .caption:
             return normalFont
         }
     }
@@ -99,19 +99,6 @@ class MyVendor: TKThemeVendor {
         set {
             _defaultTheme = newValue
         }
-    }
-}
-
-// ... and assign it as the default vendor early in the running stage
-extension TKThemeVendor {
-    
-    override public class func initialize() {
-        
-        if self == TKThemeVendor.self {
-            assert(MyVendor.shared().defaultTheme != nil)
-        }
-        
-        super.initialize()
     }
 }
 

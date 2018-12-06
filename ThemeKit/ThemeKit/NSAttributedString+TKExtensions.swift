@@ -22,10 +22,10 @@ public extension NSAttributedString {
     */
     public convenience init(string:String, textStyle:TextStyle, sizeCategory:UIContentSizeCategory? = UIContentSizeCategory.medium, textColourStyle:ColourStyle, theme:Theme? = TKThemeVendor.shared().defaultTheme) {
         
-        var attributes = [String: AnyObject]()
+        var attributes = [NSAttributedString.Key: AnyObject]()
         
-        attributes[NSFontAttributeName] = theme?.font(textStyle, sizeCategory: sizeCategory)
-        attributes[NSForegroundColorAttributeName] = theme?.colour(textColourStyle)
+        attributes[.font] = theme?.font(textStyle, sizeCategory: sizeCategory)
+        attributes[.foregroundColor] = theme?.colour(textColourStyle)
         
         self.init(string: string, attributes: attributes)
     }

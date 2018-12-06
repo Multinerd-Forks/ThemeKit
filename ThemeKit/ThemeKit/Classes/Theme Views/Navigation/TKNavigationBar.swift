@@ -127,14 +127,14 @@ open class TKNavigationBar: UINavigationBar, BarThemeable, TextThemeable {
     
     open func applyTextTheme(_ theme: Theme) {
         // apply the title text attributes
-        var attributes = self.titleTextAttributes ?? [String:AnyObject]()
+        var attributes = self.titleTextAttributes ?? [NSAttributedString.Key: Any]()
         
         if let text = textStyle {
-            attributes[NSFontAttributeName] = theme.font(text)
+            attributes[.font] = theme.font(text)
         }
         
         if let textColour = textColourStyle {
-            attributes[NSForegroundColorAttributeName] = theme.colour(textColour)
+            attributes[.foregroundColor] = theme.colour(textColour)
         }
         
         titleTextAttributes = attributes
